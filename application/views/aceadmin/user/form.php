@@ -56,7 +56,7 @@
             <div class="center">
                     <div>
                       <span class="profile-picture">
-                        <img id="avatar" class="editable editable-click editable-empty" alt="Alex's Avatar" src="<?php echo resizeimage($user_data['profile_image'],180,200)?>"></img>
+                        <img id="avatar" class="editable editable-click editable-empty" alt="<?php if(isset($user_data['username']))echo $user_data['username']?> Avatar" src="<?php echo resizeimage($user_data['profile_image'],180,200)?>"></img>
                       </span>
 
                       <div class="space-4"></div>

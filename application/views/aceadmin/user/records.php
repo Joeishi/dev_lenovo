@@ -1,5 +1,4 @@
 <div id="page-content" class="clearfix">
-
   <?php if($this->session->flashdata('success_msg')):?>
   <div class="alert alert-block alert-success">
     <button type="button" class="close" data-dismiss="alert">
@@ -28,7 +27,6 @@
     </p>
   </div>
   <?php endif;?>
-
   <div class="row-fluid">
     <div class="span12 text-right"> <a href="<?php echo base_admin_url($this->router->fetch_class().'/create');?>" class="btn btn-small btn-inverse "> <i class="icon-plus bigger-150"></i> Add </a> </div>
   </div>
@@ -44,6 +42,7 @@
               <thead>
                 <tr>
                   <th width="5%" class="center">#</th>
+                  <th class="span2">image</th>
                   <th class="span10">info</th>
                   <th width="20%">Tools Action</th>
                 </tr>
@@ -51,8 +50,9 @@
               <tbody>
                 <?php foreach($rs_data['items'] AS $key => $result): ?>
                 <tr>
-
                   <td ><p class="text-center"><?php echo $result['id']; ?></p></td>
+                  <td ><img id="avatar" class="editable editable-click editable-empty" alt="<?php echo $result['username']; ?> Avatar" src="<?php echo resizeimage($result['profile_image'],100,120)?>"></img>
+                  </td>
                   <td>
                     <p><strong>username : </strong><?php echo $result['username']; ?></p>
                     <p><strong>email : </strong><?php echo $result['email']; ?></p>
@@ -64,7 +64,7 @@
                       <a href="<?php echo base_admin_url($this->router->fetch_class().'/edit/'.$result['id']); ?>" class="btn btn-mini btn-info" style="margin-right:15px;"> <i class="icon-edit bigger-120"></i> Edit </a>
                       <a href="<?php echo base_admin_url($this->router->fetch_class().'/delete/'.$result['id']); ?>" onclick="return false;" class="btn btn-mini btn-danger" id="delete-confirm"> <i class="icon-trash bigger-120"></i> Delete </a>
                     </div>
-                  </td> 
+                  </td>
                 </tr>
                 <?php  endforeach; ?>
               </tbody>
@@ -77,20 +77,19 @@
   <!-- /.row-fluid -->
 </div>
 <!-- /.outer -->
-
 <script type="text/javascript" src="<?php echo base_url('assets/aceadmin/js/bootbox.min.js');?>" ></script>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-  $("#delete-confirm").on('click', function() {
-      var url_delete=$(this).data("url");
-      bootbox.confirm("Are you sure you want to delete?", function(result) {
-        if(result) {
-          location.href=url_delete;
-          return true;
-        }
-      });
-  });
-  
-          
+$("#delete-confirm").on('click', function() {
+var url_delete=$(this).data("url");
+bootbox.confirm("Are you sure you want to delete?", function(result) {
+if(result) {
+location.href=url_delete;
+return true;
+}
+});
+});
+
+
 });
 </script>
